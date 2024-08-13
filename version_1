@@ -1,0 +1,38 @@
+import random
+
+# Function to generate a similar LCC call number
+def generate_similar_call_number(base_class, base_number):
+    class_letter = base_class
+    number = base_number + random.randint(-2, 2)  # Small variation around a base number
+    cutter = f"{chr(random.randint(65, 70))}{random.randint(1, 999)}"  # Similar cutters
+    year = random.randint(2020, 2024)  # Similar years
+    return f"{class_letter}{number} .{cutter} {year}"
+
+# Generate a random list of similar LCC call numbers
+def generate_similar_call_numbers(n, base_class, base_number):
+    return [generate_similar_call_number(base_class, base_number) for _ in range(n)]
+
+# Generate 10 similar call numbers for practice
+base_class = random.choice(["Q", "R", "S", "T"])  # Choose a base class related to science/technology
+base_number = random.randint(500, 600)  # A base number in the range
+call_numbers = generate_similar_call_numbers(10, base_class, base_number)
+
+# Print the call numbers for the user to sort
+print("Unsorted Call Numbers:")
+for cn in call_numbers:
+    print(cn)
+
+# Sort the call numbers for the correct answer
+correct_order = sorted(call_numbers)
+
+# Ask the user to sort the call numbers
+print("\nEnter the call numbers in the correct order, one per line:")
+user_order = [input() for _ in range(10)]
+
+# Check the user's answer
+if check_order(user_order, correct_order):
+    print("\nCorrect! The call numbers are in the right order.")
+else:
+    print("\nIncorrect. The correct order is:")
+    for cn in correct_order:
+        print(cn)
